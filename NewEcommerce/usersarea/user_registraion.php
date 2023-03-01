@@ -1,5 +1,5 @@
 <?php
-     include('../includes/connnect.php');
+    include('../includes/connnect.php');
     include('../functions/commonfunction.php');
 ?>
 
@@ -69,7 +69,7 @@
 
 
 
-    
+    <a href="../index.php" class="text-decoration-none"><input type="button" value="Go To Home" class="bg-dark text-light"></a>
 
 <!-- bootstrap js link -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -87,19 +87,41 @@
         $user_username=$_POST['user_username'];
         $user_email=$_POST['user_email'];
         $user_password=$_POST['user_password'];
+        $hash_password=password_hash($user_password,PASSWORD_DEFAULT);
         $user_conf_password=$_POST['conf_user_password'];
         $user_address=$_POST['user_address'];
         $user_contact=$_POST['user_contact'];
         $user_ip=getIPAddress();
 
-        // insert query
-        $insert_query="insert into  user_table (username,user_email,user_password,user_ip,user_address,user_mobile) values ('$user_username','$user_email','$user_password','$user_ip','$user_address','$user_contact')";
-        $sql=mysqli_query($son,$insert_query);
-        if($sql_execute){
-            echo "<script>alert('Data inserted sucessfully')</script>";
-        }else{
-            die(mysqli_error($con));
+        //select query
+        $squery="Select * from user_table where username='$user_username' or user_email='$user_email' ";
+        $result=mysqli_query($con,$squery);
+        $rows_count=mysqli_num_rows($result);
+        if($rows_count>0){
+            echo "<script>alert('Username or Email Already Exists')</script>";
+        }elseif($user_password!=$user_conf_password){
+            echo "<script>alert('Password dont match')</script>";
         }
+        else{
+        // insert query
+        $insert_data="insert into  user_table (username,user_email,user_password,user_ip,user_address,user_mobile) values ('$user_username','$user_email','$hash_password','$user_ip','$user_address','$user_contact')";
+        $query=mysqli_query($con,$insert_data);
+            
+        }
+
+
+        //selecting cart items
+        $select_cart_items="Select * from cart_details where ip_address='$user_ip'";
+        $cquery=mysqli_query($con,$select_cart_items);
+        $rows_count=mysqli_num_rows($cquery);
+        if($rows_count>0){
+            $_SESSION['username']=$user_username;
+            echo "<script>alert('You have items in your cart')</script>";
+            echo "<script>window.open('checkout.php','_self')</script>";
+        }else{
+            echo "<script>window.open('../index.php','_self')</script>";
+        }
+        
     }
 
 ?>

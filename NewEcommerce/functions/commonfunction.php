@@ -229,7 +229,7 @@ function cart()
 
             echo "<script>window.open('index.php','_self')</script>";
         } else {
-            $insert_query = "insert into cart_details (product_id,ip_address,quantity) values ('$get_product_id','$ip',1)";
+            $insert_query = "insert into cart_details (product_id,ip_address,quantity) values ('$get_product_id','$ip',0)";
             $result_query = mysqli_query($con, $insert_query);
             echo "<script>alert('This item is added in the cart')</script>";
             echo "<script>window.open('index.php','_self')</script>";
@@ -279,6 +279,32 @@ function total_cart_price()
     }
     echo $total;
 
+}
+
+//get_user_order_details
+function get_user_order_details(){
+    global $con;
+    $username=$_SESSION['username'];
+    $get_details="select * from user_table where username='$username'";
+    $result_query=mysqli_query($con,$get_details);
+    while($row_query=mysqli_fetch_array($result_query)){
+        $user_id=$row_query['user_id'];   
+            if(!isset($_GET['my_orders'])){
+                if(!isset($_GET['delete_account'])){
+                    $get_orders="select * from user_orders where user_id=$user_id and order_status='pending'";
+                    $result_orders_query=mysqli_query($con,$get_orders);
+                    $row_count=mysqli_num_rows($result_orders_query);
+                    if($row_count>0){
+                        echo "<h3 class='text-center mt-5 mb-2 text-sucess'>You have <span class='text-danger'>$row_count</span> pending orders.</h3>
+                        <a href='profile.php?my_orders'class='text-dark'><p class='text-center'>Order Details</p></a>";
+                    }else{
+                        echo "<h3 class='text-center mt-5 mb-2 text-sucess'>You have Zero pending orders.</h3>
+                        <a href='../index.php'class='text-dark'><p class='text-center'>Explore Products</p></a>";
+                    }
+                }
+            }
+        
+    }
 }
 
 ?>

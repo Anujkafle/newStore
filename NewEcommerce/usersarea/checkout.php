@@ -1,6 +1,7 @@
 <!-- connect file -->
 <?php
 include('../includes/connnect.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -39,9 +40,6 @@ include('../includes/connnect.php');
                             <a class="nav-link active fa-solid fa-house" aria-current="page"
                                 href="../index.php">&nbsp;Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link fa-solid fa-address-book" href="#">&nbsp;Contact</a>
-                        </li>
 
 
                     </ul>
@@ -58,12 +56,30 @@ include('../includes/connnect.php');
         <!-- second child -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome Guest</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
-                </li>
+
+                    <?php
+                    if(!isset($_SESSION['username'])){
+                        echo "<li class='nav-item'>
+                        <a class='nav-link' href='#'>Welcome Guest</a>
+                    </li>";
+                    }else{
+                    echo"  <li class='nav-item'>
+                    <a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a>
+                </li>";
+                    }
+                        if(!isset($_SESSION['username'])){
+                            echo "<li class='nav-item'>
+                                <a class='nav-link' href='./user_login.php'>LogIn</a>
+                            </li>";
+                        }else{
+                          echo"  <li class='nav-item'>
+                                <a class='nav-link' href='logout.php'>LogOut</a>
+                            </li>";
+                        }
+
+
+
+                    ?>
             </ul>
         </nav>
 
@@ -87,8 +103,7 @@ include('../includes/connnect.php');
                             echo"<div class='bg-light'>
                             <h3 class='text-center'> Checkout Time </h3>
                             <h4 class='text-center'>Please Choose the desired Method </h4>
-                
-                        </div>";
+                            </div>";
                             include('payment.php');
                         }   
                     ?>

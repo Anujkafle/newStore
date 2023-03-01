@@ -2,6 +2,7 @@
 <?php
 include('includes/connnect.php');
 include('functions/commonfunction.php');
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -38,15 +39,24 @@ include('functions/commonfunction.php');
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active fa-solid fa-house" aria-current="page"
+                            <a class="nav-link fa-solid fa-house" aria-current="page"
                                 href="index.php">&nbsp;Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fa-brands fa-product-hunt" href="display.php">&nbsp;Products</a>
+                            <a class="nav-link active fa-brands fa-product-hunt" href="display.php">&nbsp;Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link fa-solid fa-registered" href="#">&nbsp;Register</a>
-                        </li>
+                        <?php
+    if(isset($_SESSION['username'])){
+        echo "<li class='nav-item'>
+        <a class='nav-link fa fa-user' href='./usersarea/profile.php'>&nbsp;My Account</a>
+    </li>";
+    }else{
+        echo "<li class='nav-item'>
+        <a class='nav-link fa-solid fa-registered' href='./usersarea/user_registraion.php'>&nbsp;Register</a>
+    </li>";
+    }
+
+?>
                         <li class="nav-item">
                             <a class="nav-link fa-solid fa-address-book" href="#">&nbsp;Contact</a>
                         </li>
@@ -79,12 +89,31 @@ include('functions/commonfunction.php');
         <!-- second child -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Welcome Guest</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="usersarea/userlogin.php">Login</a>
-                </li>
+
+                <?php
+
+if(!isset($_SESSION['username'])){
+    echo "<li class='nav-item'>
+    <a class='nav-link' href='#'>Welcome Guest</a>
+</li>";
+}else{
+echo"  <li class='nav-item'>
+<a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a>
+</li>";
+}
+                        if(!isset($_SESSION['username'])){
+                            echo "<li class='nav-item'>
+                                <a class='nav-link' href='./usersarea/user_login.php'>LogIn</a>
+                            </li>";
+                        }else{
+                          echo"  <li class='nav-item'>
+                                <a class='nav-link' href='./usersarea/logout.php'>LogOut</a>
+                            </li>";
+                        }
+
+
+
+                    ?>
             </ul>
         </nav>
 

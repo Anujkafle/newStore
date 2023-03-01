@@ -3,6 +3,7 @@
 <?php
  include('includes/connnect.php');
  include('functions/commonfunction.php');
+ session_start();
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +49,7 @@
              <a class="nav-link fa-brands fa-product-hunt" href="display.php">&nbsp;Products</a>
             </li>
             <li class="nav-item">
-             <a class="nav-link fa-solid fa-registered" href="#">&nbsp;Register</a>
+             <a class="nav-link fa-solid fa-registered" href="./usersarea/user_registraion.php">&nbsp;Register</a>
             </li>
             <li class="nav-item">
              <a class="nav-link fa-solid fa-address-book" href="#">&nbsp;Contact</a>
@@ -73,12 +74,30 @@ cart();
 <!-- second child -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-light">
     <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Welcome Guest</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="usersarea/userlogin.php">Login</a>
-        </li>
+
+        <?php
+        if(!isset($_SESSION['username'])){
+            echo "<li class='nav-item'>
+            <a class='nav-link' href='#'>Welcome Guest</a>
+        </li>";
+        }else{
+        echo"  <li class='nav-item'>
+        <a class='nav-link' href='#'>Welcome ".$_SESSION['username']."</a>
+    </li>";
+        }
+                        if(!isset($_SESSION['username'])){
+                            echo "<li class='nav-item'>
+                                <a class='nav-link' href='./usersarea/user_login.php'>LogIn</a>
+                            </li>";
+                        }else{
+                          echo"  <li class='nav-item'>
+                                <a class='nav-link' href='./usersarea/logout.php'>LogOut</a>
+                            </li>";
+                        }
+
+
+
+                    ?>
     </ul>
 </nav>
 
