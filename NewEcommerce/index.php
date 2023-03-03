@@ -185,7 +185,11 @@ session_start();
         </div>
 
         <!-- footer include -->
-        <?php include('includes\footer.php') ?>
+        <div class="bg-info p-3 footer">
+    <p class="text-center "> All Rights Reserved  -- Designed by Anuj Kafle</p>
+    <a href="admin/admin_login.php" class="text-decoration-none text-dark ">Admin_login</a>
+</div>
+
 
 
     </div>

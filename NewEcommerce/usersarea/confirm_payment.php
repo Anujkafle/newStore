@@ -59,11 +59,11 @@ if(isset($_POST['confirm_payment'])){
             </div>
             <div class="form-outline my-4 text-center w-50 m-auto">
                 <select name="payment_mode"  class="form-select w-50 m-auto">
-                    <option value="">Select Payment Mode</option>
-                    <option value="">Esewa</option>
-                    <option value="">Khalti</option>
-                    <option value="">Cash on Delivery</option>
-                    <option value="">Pay Offline</option>
+                    <option >Select Payment Mode</option>
+                    <option >Esewa</option>
+                    <option >Khalti</option>
+                    <option >Cash on Delivery</option>
+                    <option>Pay Offline</option>
                 </select>
             </div>
             <div class="form-outline my-4 text-center w-50 m-auto">
