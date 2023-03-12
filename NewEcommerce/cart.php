@@ -193,7 +193,7 @@ cart();
                     if($result_count>0){
                         echo "<h4 class='px-3'>SubTotal:&nbsp;&#8360;<strong > $total/-</strong></h4>
                         <input type='submit' value='Continue Shopping' class='bg-dark px-3 py-2 text-light b-0' name='continue_shopping'>
-                        <button class='bg-danger mx-3 px-3 py-2 text-light b-0'><a href='./usersarea/checkout.php' class='text-light text-decoration-none'>Checkout</a> </button>";
+                        <button class='bg-danger mx-3 px-3 py-2 text-light b-0'><a href='./usersarea/checkout.php?total=$total' class='text-light text-decoration-none'>Checkout</a> </button>";
                     }else{
                         echo" <input type='submit' value='Continue Shopping' class='bg-dark px-3 py-2 text-light b-0'name='continue_shopping'>";
 

@@ -44,7 +44,10 @@
         <h2 class="text-center text-info">Payment Options</h2>
         <div class="row d-flex justify-content-center align-items-center mt-5">
             <div class="col-md-6">
-                <a href="https://khalti.com/" target="_blank" class="m-5 p-3"><img src="../imgs/Khalti.jpg" alt="khalti"></a>
+                <?php 
+                $total=$_GET["total"];
+                ?>
+                <a href="esewa.php?total=<?php echo $total ?>" class="m-5 p-3"><img src="../imgs/Khalti.jpg" alt="esewa"></a>  
             </div>
             <div class="col-md-6">
                 <a href="order.php?user_id=<?php echo $user_id ?>"  class="text-decoration-none text-center"><h2>Pay offline</h2></a>
